@@ -1,0 +1,197 @@
+{
+  "upper-case-constant": {
+    "prefix": "ucc",
+    "description": "Snippet to create a constant in upper case based on the filename",
+    "body": "export const ${TM_FILENAME_BASE/([^-]+)(-*)/${1:/upcase}${2:+_}/g} = '${1:value}'"
+  },
+  "camel-case-constant": {
+    "prefix": "ccc",
+    "description": "Snippet to create a constant in upper case based on the filename",
+    "body": "export const ${TM_FILENAME_BASE/(?:.+^|-)([a-z])/${1:/upcase}/g} = '${1:value}'"
+  },
+  "export from file": {
+    "prefix": "eff",
+    "body": "export * from '${1:./}'"
+  },
+  "pure-functional-component-with-props": {
+    "prefix": "sfc",
+    "description": "Snippet to create functional component with FC type inside Joy Frontend project with Props",
+    "body": [
+      "import { FC } from 'react'",
+      "",
+      "interface Props {$0}",
+      "",
+      "export const ${TM_FILENAME_BASE/(?:^|-)([a-z])|/${1:/upcase}/g}: FC<Props> = (props) => {",
+      "  return (",
+      "    <div></div>",
+      "  )",
+      "}",
+      ""
+    ]
+  },
+  "expand-react-component-props": {
+    "prefix": "exp",
+    "description": "Destructure React Component props",
+    "body": "const { $0 } = props"
+  },
+  "import-react": {
+    "prefix": "imr",
+    "description": "import React from 'react'",
+    "body": "import React from 'react'"
+  },
+  "test-react-component": {
+    "prefix": "trc",
+    "description": "test Joy React component snippet",
+    "body": [
+      "import { FC } from 'react';",
+      "import { BaseMockedComponent } from '@testing/components';",
+      "import { MockComponentProps } from '@testing/types';",
+      "import { render } from '@testing/packages/react-testing-library'",
+      "",
+      "describe('<${TM_FILENAME_BASE/(?:^|-)([a-z])/${1:/upcase}/g} $1 />', () => {",
+      "  const Component: FC<MockComponentProps> = (props) => {",
+      "    return (",
+      "       <BaseMockedComponent {...props}>",
+      "         $2",
+      "       </BaseMockedComponent>",
+      "    )",
+      "  }",
+      "",
+      "  it('should render without crashing', () => {",
+      "    const wrapper = render(<Component />)",
+      "    wrapper.unmount()",
+      "  });",
+      "",
+      "  describe('business rules', () => {$3});",
+      "});"
+    ]
+  },
+  "test-crud-component": {
+    "prefix": "tcc",
+    "description": "test Joy React component snippet",
+    "body": [
+      "import { FC } from 'react';",
+      "import { BaseMockedComponent } from '@testing/components';",
+      "import { MockComponentProps } from '@testing/types';",
+      "import { render } from '@testing/packages/react-testing-library'",
+      "import { MockedResponse } from '@testing/packages/apollo-react-testing';",
+      "import { generateMockGraphQLError } from '@testing/utils';",
+      "",
+      "describe('<${TM_FILENAME_BASE/(?:^|-)([a-z])/${1:/upcase}/g} $1 />', () => {",
+      "  const Component: FC<MockComponentProps> = (props) => {",
+      "    return (",
+      "       <BaseMockedComponent {...props}>",
+      "         $2",
+      "       </BaseMockedComponent>",
+      "    )",
+      "  }",
+      "",
+      "  it('should render without crashing', () => {",
+      "    const wrapper = render(<Component />)",
+      "    wrapper.unmount()",
+      "  });",
+      "",
+      "  describe('business rules', () => {",
+      "    const variables = {$3}",
+      "    const request: MockedResponse['request'] = {",
+      "      query: $4,",
+      "      variables",
+      "    }",
+      "",
+      "    it('should show success message', async () => {",
+      "      const mocks: MockedResponse[] = [{ request, result: { data: {$5} }}];",
+      "      const wrapper = render(<Component mocks={mocks} />)",
+      "",
+      "      await ${6:submitFunction}(wrapper)",
+      "",
+      "      const success = wrapper.queryByText(${7:`My success message`})",
+      "      expect(success).toBeTruthy()",
+      "    });",
+      "",
+      "    it('should show error message', async () => {",
+      "      const mocks: MockedResponse[] = [{ request, result: { errors: [generateMockGraphQLError()] }}];",
+      "      const wrapper = render(<Component mocks={mocks} />)",
+      "",
+      "      await ${6:submitFunction}(wrapper)",
+      "",
+      "      const failure = wrapper.queryByText(${8:`My failure message`})",
+      "      expect(failure).toBeTruthy()",
+      "    });",
+      "  });",
+      "});"
+    ]
+  },
+  "test-react-component-submit-function": {
+    "prefix": "trcsf",
+    "description": "Template for component test submit function",
+    "body": [
+      "import { RenderResult, act } from '@testing/packages/react-testing-library';",
+      "",
+      "export const ${TM_FILENAME_BASE/(?:.+^|-)([a-z])/${1:/upcase}/g} = (wrapper: RenderResult) => {",
+      "  return act(async () => {$0})",
+      "};"
+    ]
+  },
+  "submit-component-test-function-file": {
+    "prefix": "sctff",
+    "description": "Template for component test submit function in separate file",
+    "body": [
+      "import { act, RenderResult } from '@testing/packages/react-testing-library';",
+      "",
+      "export const ${TM_FILENAME_BASE/(?:.+^|-)([a-z])/${1:/upcase}/g} = (wrapper: RenderResult) => {",
+      "  return act(async () => {$0})",
+      "};"
+    ]
+  },
+  "wrapper-definition": {
+    "prefix": "wd",
+    "description": "Defines wrapper for <Component />",
+    "body": "const wrapper = render(<Component />);"
+  },
+  "wrapper-definition-with-mocks": {
+    "prefix": "wdm",
+    "description": "Defines wrapper for <Component /> with mocks",
+    "body": "const wrapper = render(<Component mocks={${0:mocks}} />);"
+  },
+  "file-arrow-function": {
+    "prefix": "faf",
+    "description": "Defines an arrow function based on the name of the file",
+    "body": "export const ${TM_FILENAME_BASE/(?:.+^|-)([a-z])/${1:/upcase}/g} = ($1) => {$0}"
+  },
+  "async-file-arrow-function": {
+    "prefix": "afaf",
+    "description": "Defines an async arrow function based on the name of the file",
+    "body": "export const ${TM_FILENAME_BASE/(?:.+^|-)([a-z])/${1:/upcase}/g} = async ($1) => {$0}"
+  },
+  "create-interface": {
+    "prefix": "ci",
+    "description": "Defines an interface based on the name of the file",
+    "body": "export interface ${TM_FILENAME_BASE/(?:^|-)([a-z])|/${1:/upcase}/g} {$0}"
+  },
+  "create-type": {
+    "prefix": "ct",
+    "description": "Defines a type based on the name of the file",
+    "body": "export type ${TM_FILENAME_BASE/(?:^|-)([a-z])|/${1:/upcase}/g} = {$0}"
+  },
+  "create-next-page": {
+    "prefix": "cnp",
+    "description": "Snippet for creating next page component",
+    "body": [
+      "import { NextPage } from 'next';",
+      "",
+      "const ${TM_FILENAME_BASE/(?:^|-)([a-z])|/${1:/upcase}/g}: NextPage = () => {",
+      "  return $0",
+      "};",
+      "",
+      "export default ${TM_FILENAME_BASE/(?:^|-)([a-z])|/${1:/upcase}/g}"
+    ]
+  },
+  "class-named-export": {
+    "prefix": "cne",
+    "description": "Snippet for creating class based on filename",
+    "body": [
+      "export class ${TM_FILENAME_BASE/(?:^|-)([a-z])|/${1:/upcase}/g} {$0}",
+      ""
+    ]
+  }
+}
