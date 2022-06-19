@@ -11,11 +11,12 @@ interface Props {}
 
 export const AvroFileHandler: FC<Props> = () => {
   const [schema, setSchema] = useState<AvroSchema | undefined>();
-  const { result, appendField, removeField } = useAvroFieldParseResult();
+  const { result, appendField, removeField, removeResults } =
+    useAvroFieldParseResult();
 
   return (
     <AvroFileContextProvider
-      value={{ setSchema, appendField, removeField, result }}
+      value={{ setSchema, appendField, removeField, result, removeResults }}
     >
       <div className={classes.container}>
         {!schema ? (

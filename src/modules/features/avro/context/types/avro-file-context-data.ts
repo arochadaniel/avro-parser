@@ -23,6 +23,7 @@ export type AvroRemoveFieldResult = (
 
 export type AvroFileContextData = {
   setSchema: Dispatch<SetStateAction<AvroSchema | undefined>>;
+  removeResults: () => void;
   appendField: AvroAppendFieldResult;
   removeField: AvroRemoveFieldResult;
   result?: AvroFileParseResult;

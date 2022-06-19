@@ -6,6 +6,7 @@ const Context = createContext<AvroFileContextData>({
   setSchema: () => {},
   appendField: () => {},
   removeField: () => {},
+  removeResults: () => {},
 });
 
 export const AvroFileContextProvider = Context.Provider;

@@ -45,5 +45,9 @@ export const useAvroFieldParseResult = () => {
     });
   }, []);
 
-  return { result, appendField, removeField };
+  const removeResults = useCallback(() => {
+    setResult(undefined);
+  }, []);
+
+  return { result, appendField, removeField, removeResults };
 };
