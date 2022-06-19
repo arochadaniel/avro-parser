@@ -1,7 +1,8 @@
+import { AvroFileParser } from "@features/avro";
 import type { NextPage } from "next";
 
 const Home: NextPage = () => {
-  return <div></div>;
+  return <AvroFileParser />;
 };
 
 export default Home;
