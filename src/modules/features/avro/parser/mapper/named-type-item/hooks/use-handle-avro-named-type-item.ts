@@ -20,25 +20,6 @@ export const useHandleAvroNamedTypeItem = (field: NamedType, path: string) => {
     [appendField, field, path, removeField]
   );
 
-  const shouldBeDisabled = useCallback(
-    (type: AvroFieldResultType) => {
-      if (!result) {
-        return false;
-      }
-
-      const typeToVerify: AvroFieldResultType =
-        type === "encrypted" ? "masked" : "encrypted";
-
-      const index = result[typeToVerify]?.findIndex((r) => r.path === path);
-      if (typeof index === "undefined" || index === -1) {
-        return false;
-      }
-
-      return true;
-    },
-    [path, result]
-  );
-
   const isChecked = useCallback(
     (type: AvroFieldResultType) => {
       if (!result) {
@@ -55,5 +36,5 @@ export const useHandleAvroNamedTypeItem = (field: NamedType, path: string) => {
     [path, result]
   );
 
-  return { shouldBeDisabled, handleChange, isChecked };
+  return { handleChange, isChecked };
 };

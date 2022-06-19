@@ -8,9 +8,11 @@ interface Props {
   path: string;
 }
 
+export const MASKED_CHECKBOX_FIELD_TEST_ID = "masked-checkbox";
+export const ENCRYPTED_CHECKBOX_FIELD_TEST_ID = "encrypted-checkbox";
+
 export const AvroNamedTypeItem: FC<Props> = ({ field, path }) => {
-  const { shouldBeDisabled, handleChange, isChecked } =
-    useHandleAvroNamedTypeItem(field, path);
+  const { handleChange, isChecked } = useHandleAvroNamedTypeItem(field, path);
 
   return (
     <div className={classes.item}>
@@ -19,14 +21,16 @@ export const AvroNamedTypeItem: FC<Props> = ({ field, path }) => {
         <input
           type="checkbox"
           checked={isChecked("masked")}
-          disabled={shouldBeDisabled("masked")}
           onChange={handleChange("masked")}
+          disabled={isChecked("encrypted")}
+          data-testid={MASKED_CHECKBOX_FIELD_TEST_ID}
         />
         <input
           type="checkbox"
+          disabled={isChecked("masked")}
           checked={isChecked("encrypted")}
-          disabled={shouldBeDisabled("encrypted")}
           onChange={handleChange("encrypted")}
+          data-testid={ENCRYPTED_CHECKBOX_FIELD_TEST_ID}
         />
       </div>
     </div>
