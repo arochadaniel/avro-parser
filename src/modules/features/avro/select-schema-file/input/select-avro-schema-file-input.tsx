@@ -1,5 +1,6 @@
 import { ChangeEventHandler, FC, Fragment, useCallback, useRef } from "react";
 
+import { AvroSchema } from "@features/avro/types";
 import { useAvroFileContext } from "@features/avro/context/avro-file-context";
 
 interface Props {}
@@ -25,7 +26,7 @@ export const SelectAvroSchemaFileInput: FC<Props> = () => {
         return;
       }
 
-      const data = JSON.parse(text);
+      const data = JSON.parse(text) as AvroSchema;
       if (!data) {
         return;
       }

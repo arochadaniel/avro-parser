@@ -3,8 +3,9 @@ import { createContext, useContext } from "react";
 import { AvroFileContextData } from "./types";
 
 const Context = createContext<AvroFileContextData>({
-  schema: undefined,
   setSchema: () => {},
+  appendField: () => {},
+  removeField: () => {},
 });
 
 export const AvroFileContextProvider = Context.Provider;

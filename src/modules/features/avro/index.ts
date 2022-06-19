@@ -1,1 +1,1 @@
-export * from "./avro-file-parser";
+export * from "./avro-file-handler";
