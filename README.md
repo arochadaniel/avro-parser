@@ -1,3 +1,13 @@
+## Avro schema file parser and selector
+
+This project handles the local uploading and parsing of a .avsc file to choose fields into being decrypted and masked. Shows the results/selected fields with dot notation in the case of nested fields.
+
+The application is completely tested with React Testing Library. The tests can be run with:
+
+```bash
+npm test
+```
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
