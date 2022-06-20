@@ -5,6 +5,8 @@ import { useAvroFileContext } from "@features/avro/context/avro-file-context";
 
 interface Props {}
 
+export const AVRO_SCHEMA_UPLOAD_INPUT_TEST_ID = "upload-avro-schema";
+
 export const SelectAvroSchemaFileInput: FC<Props> = () => {
   const { setSchema } = useAvroFileContext();
   const fileInput = useRef<HTMLInputElement>(null);
@@ -45,6 +47,7 @@ export const SelectAvroSchemaFileInput: FC<Props> = () => {
         ref={fileInput}
         accept=".avsc"
         onChange={handleReceiveFile}
+        data-testid={AVRO_SCHEMA_UPLOAD_INPUT_TEST_ID}
       />
     </Fragment>
   );

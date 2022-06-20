@@ -8,9 +8,11 @@ interface Props {
   schema: AvroSchema;
 }
 
+export const AVRO_FILE_PARSER_TEST_ID = "avro-schema-view";
+
 export const AvroFileParser: FC<Props> = ({ schema }) => {
   return (
-    <div>
+    <div data-testid={AVRO_FILE_PARSER_TEST_ID}>
       <AvroSchemaView schema={schema} />
       <br />
       <ClearAvroSchemaButton />
